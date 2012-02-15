@@ -18,9 +18,9 @@ requires = [
     'pyramid_mailer'
     ]
 
-setup(name='salo2011',
+setup(name='saloensenyament',
       version='0.0',
-      description='salo2011',
+      description='Salo ensenyament',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -37,10 +37,10 @@ setup(name='salo2011',
       zip_safe=False,
       install_requires = requires,
       tests_require= requires,
-      test_suite="salo2011",
+      test_suite="saloensenyament",
       entry_points = """\
       [paste.app_factory]
-      main = salo2011:main
+      main = saloensenyament:main
       """,
       paster_plugins=['pyramid'],
       )
