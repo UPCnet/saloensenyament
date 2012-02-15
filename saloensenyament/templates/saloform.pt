@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html metal:use-macro="api.masterTemplate.macros['master']">
+<head></head>
+<body>
+    <metal:main fill-slot="main">
+
+<form id="theform" action="${api.getAppURL()}" method="post">
+			
+<div data-role="page" id="main">
+
+    <div data-theme="b" data-role="header" class="ui-bar-b ui-header" role="banner">
+        <h1>UPC Sal&oacute;</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+<!--            <label for="email">Introdueix l'email:</label>-->
+            <input type="text" name="email" id="email" value="" />
+            <input type="submit" name="form.submitted" value="Envia" />
+          </fieldset>
+        </div>
+    
+        <ul data-role="listview" data-theme="c">
+            <li class="white-space: none;" tal:repeat="ambit titulacions">
+                    <a tal:attributes="href string:#${repeat.ambit.number}" tal:content="ambit.name">Ambit</a>
+            </li>
+        </ul>
+
+    </div>
+
+
+</div>
+
+<tal:pages repeat="ambit titulacions">
+	<div data-role="page" tal:attributes="id str(repeat.ambit.number)">
+	    <div data-theme="b" data-role="header">
+	       <h1 tal:content="ambit.name">Titol Ambit</h1>
+	    </div><!-- /header -->
+		<div data-role="content">
+		    <div data-role="fieldcontain">
+              <fieldset data-role="controlgroup">
+<!--                <label for="email">Introdueix l'email:</label>-->
+                <input type="text" name="email" id="email" value="" />
+                <input type="submit" name="form.submitted" value="Envia" />
+              </fieldset>
+            </div>
+		    <tal:cicle repeat="cicle ambit.data.keys()">
+			    <div data-role="fieldcontain">
+			    <b tal:content="cicle">Cicle</b>
+				    <fieldset data-role="controlgroup">
+				        <tal:titulacio repeat="titulacio ambit.data[cicle]">
+					        <input type="checkbox"
+					               tal:attributes="name titulacio['pdf'];
+					                               id titulacio['pdf']">
+					        </input>
+					        <label tal:attributes="for titulacio['pdf']" tal:content="titulacio['nom']">Titulacio</label>
+				        </tal:titulacio>
+				    </fieldset>
+		        </div>
+		    </tal:cicle>
+		</div>	
+	</div>
+</tal:pages>
+
+</form>
+
+  </metal:main>
+</body>
+</html>
