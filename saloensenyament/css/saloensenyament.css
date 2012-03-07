@@ -28,7 +28,19 @@ a.ui-link-inherit{
     padding: 0px 15px 15px 15px;
 }
 
-.ui-btn-hover-c {
+.ui-icon-checkbox-on {
+    background-image: url("images/icons-18-white.png");
+    background-position: -252px 50%;
+    background-color: #ff9999;
+}
+
+.ui-icon-checkbox-off {
+    background-image: url("images/form-check-on.png");
+    background-color: #dcdcdc;
+}
+
+
+/*.ui-btn-hover-c {
         border: 1px solid               #bbb;
         background:                     #ff9999;
         font-weight: bold;
@@ -58,3 +70,4 @@ a.ui-link-inherit{
                 color-stop(1,           #ff9999));
         -msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ff9999')";
 }
+*/

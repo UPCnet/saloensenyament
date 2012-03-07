@@ -5,11 +5,11 @@
 <body>
     <metal:main fill-slot="main">
 
-	<form id="theform" action="${api.getAppURL()}/" method="post">
+	<form id="theform" action="${api.getAppURL()}/salofutura" method="post">
 				
 		<div data-role="page" id="main">
 		    <div data-theme="b" data-role="header" class="ui-bar-b ui-header" role="banner">
-		        <h1>UPC - Sal&oacute; de l'ensenyament 2012</h1>
+		        <h1>UPC - Sal&oacute; Futura 2012</h1>
 		    </div>
 		    <div data-role="content">
 		        <ul data-role="listview" data-divider-theme="b" data-inset="true">
@@ -20,35 +20,34 @@
 		        </ul>
 		    </div>
 		    <input type="text" name="email" id="email" value="" placeholder="Correu del sol·licitant" />
-		    <input type="submit" name="form.submitted" value="Envia" data-transition="pop"/>
+		    <input type="submit" name="formFutura.submitted" value="Envia" data-transition="pop"/>
 		</div>
 
 		<tal:pages repeat="ambit titulacions">
 			<div data-role="page" tal:attributes="id string:id${repeat.ambit.number}">
+
 			    <div data-theme="b" data-role="header">
-			    	<a href="../../" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
+			    	<a href="../salofutura/" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
 			       <h1 tal:content="ambit.name">Titol Ambit</h1>
 			    </div>
+
 				<div data-role="content">
-				    <tal:cicle repeat="cicle sorted(ambit.data.keys(), reverse=True)">
-					    <div data-role="fieldcontain">
-					    	<b tal:content="cicle">Cicle</b>
-						    <fieldset data-role="controlgroup" data-type="vertical">
-						    	<!--<span tal:content="graus"></span>-->
-						        <tal:titulacio repeat="titulacio ambit.data[cicle].keys()">
-							        <input type="checkbox"
-							               tal:attributes="name titulacio;
-							                               id titulacio">
-							        </input>
-							        <label tal:attributes="for titulacio" tal:content="titulacio">Titulacio</label>
-						        </tal:titulacio>
-						    </fieldset>
-				        </div>
-				    </tal:cicle>
+					<fieldset data-role="controlgroup" data-type="vertical">
+					    <tal:cicle repeat="cicle sorted(ambit.data.keys(), reverse=True)">
+					        <tal:titulacio repeat="titulacio ambit.data[cicle]">
+						        <input type="checkbox"
+						               tal:attributes="name titulacio;
+						                               id titulacio">
+						        </input>
+								<label tal:attributes="for titulacio" tal:content="cicle">Titulacio</label> 
+					        </tal:titulacio>
+					    </tal:cicle>
+				    </fieldset>
 		            <input type="text" name="email" id="email" value="" placeholder="Correu del sol·licitant"/>
-					<input type="submit" name="form.submitted" value="Envia" data-transition="pop"/>
+					<input type="submit" name="formFutura.submitted" value="Envia" data-transition="pop"/>
 				</div>	
 			</div>
+
 		</tal:pages>
 
 	</form>

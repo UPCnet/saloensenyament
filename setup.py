@@ -15,7 +15,7 @@ requires = [
     'WebError',
     'repoze.who',
     'pyramid_who',
-    'pyramid_mailer'
+    'pyramid_mailer',
     ]
 
 setup(name='saloensenyament',

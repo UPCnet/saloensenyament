@@ -20,8 +20,6 @@ def _fixup_came_from(request, came_from):
 
 def login(context, request):
     
-#    import ipdb; ipdb.set_trace()
-    
     plugins = request.environ.get('repoze.who.plugins', {})
     auth_tkt = plugins.get('auth_tkt')
 
@@ -51,7 +49,6 @@ def login(context, request):
         authenticators = filter(None, [plugins.get(name) for name in ['htpasswd']])
                                    
         userid = None
-        #import ipdb; ipdb.set_trace()
         if authenticators:
            reason = 'Bad username or password'
         else:
