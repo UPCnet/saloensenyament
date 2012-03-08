@@ -34,7 +34,6 @@
 					    <div data-role="fieldcontain">
 					    	<b tal:content="cicle">Cicle</b>
 						    <fieldset data-role="controlgroup" data-type="vertical">
-						    	<!--<span tal:content="graus"></span>-->
 						        <tal:titulacio repeat="titulacio ambit.data[cicle].keys()">
 							        <input type="checkbox"
 							               tal:attributes="name titulacio;
