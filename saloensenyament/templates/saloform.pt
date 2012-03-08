@@ -45,13 +45,22 @@
 						    </fieldset>
 				        </div>
 				    </tal:cicle>
-		            <input type="text" name="email" id="email" value="" placeholder="Correu del sol·licitant"/>
-					<input type="submit" name="form.submitted" value="Envia" data-transition="pop"/>
+				    <fieldset data-role="controlgroup">
+		            	<input type="text" name="email" id="email" value="" placeholder="Correu del sol·licitant"/>
+						<input type="submit" name="form.submitted" value="Envia" data-transition="pop" onclick="resetValues()"/>
+
+					<fieldset data-role="controlgroup">
 				</div>	
 			</div>
 		</tal:pages>
 
 	</form>
+    <script type="text/javascript"> 
+    	function resetValues(){
+    	   $("#theform input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
+    	   $("#email").attr("value","");
+    	}
+    </script>
 
 	</metal:main>
 </body>
