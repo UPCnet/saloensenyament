@@ -9,7 +9,7 @@
 				
 		<div data-role="page" id="main">
 		    <div data-theme="b" data-role="header" class="ui-bar-b ui-header" role="banner">
-		        <h1>UPC - Sal&oacute; de l'ensenyament 2012</h1>
+		        <h1>UPC - Sal&oacute; de l'Ensenyament 2012</h1>
 		    </div>
 		    <div data-role="content">
 		        <ul data-role="listview" data-divider-theme="b" data-inset="true">

@@ -24,7 +24,7 @@ def saloForm(context, request):
     
     titulacions, graus = getTitulacionsEnsenyament(request.registry.settings['titulacions_file_ensenyament'])
 
-    sorted_titulacions = [dict(name=a[0],data=a[1]) for a in sorted(titulacions.iteritems(), key=itemgetter(0), reverse=False)]    
+    sorted_titulacions = [dict(name=a[0],data=a[1]) for a in sorted(titulacions.iteritems(), key=itemgetter(0), reverse=False)]
     
     if request.params.get('form.submitted', None) is not None:
         choices = []
@@ -72,6 +72,7 @@ def extractMail(emailList):
             return email
      
 def enviaMail(request, email, choices, graus):
+    ### Mail que s'envia amb SALO ENSENYAMENT
     if not email :
         return False
     else:
@@ -81,7 +82,7 @@ def enviaMail(request, email, choices, graus):
         subject = u"UPC. Saló de l’Ensenyament. Informació titulacions 2012/13"
         
         body1 = """Benvolgut/Benvolguda,<br/><br/>
-    A continuació, adjuntem els documents relacionats amb les titulacions de la UPC sobre les quals has demanat informació al Saló de l'Ensenyament. Esperem que et siguin d’utilitat per ajudar-te a triar els teus estudis universitaris.<br/><br/>
+    A continuació, adjuntem els enllaços relacionats amb les titulacions de la UPC sobre les quals has demanat informació al Saló de l'Ensenyament. Esperem que et siguin d’utilitat per ajudar-te a triar els teus estudis universitaris.<br/><br/>
     """.decode('utf-8')
         
         body2 = """<br/>Estem a la teva disposició per aclarir-te qualsevol dubte. Ho pots fer:<br/>
@@ -93,18 +94,20 @@ def enviaMail(request, email, choices, graus):
 
     """.decode('utf-8')
 
-        peu = """Barcelona, """.decode('utf-8') + unicode(datetime.datetime.now().day) + """ de març de 2012<br/>
-    © UPC. Universitat Politècnica de Catalunya.  BarcelonaTech<br/><br/>
+        peu = """Barcelona, """.decode('utf-8') + """<br/>© UPC. Universitat Politècnica de Catalunya.  BarcelonaTech<br/><br/>
 
-    En compliment del que estableixen les normatives de protecció de dades, t’informem que les dades que ens has donat en aquest formulari les inclourem al fitxer d’estudiants de la UPC, per tal de poder-te enviar la informació que ens has demanat. Usarem l’adreça de correu electrònic que ens has donat per enviar-te informació de la UPC, però si no vols rebre cap més informació, ens pots enviar un correu electrònic a saloensenyament@upc.edu, o ens ho pots dir quan responguis els correus electrònics que t’enviem.  Finalment, també t’informem que, si vols accedir a les dades teves, canviar- les, oposar-te a que les tinguem o que  deixem de tractar-les, et pots adreçar al Servei de Comunicació i Promoció, amb  domicili a la Plaça d’Eusebi Güell, 7 de  Barcelona, o a l’adreça electrònica: saloensenyament@upc.edu
+    En compliment del que estableixen les normatives de protecció de dades, t’informem que les dades que ens has donat en aquest formulari les inclourem al fitxer d’estudiants de la UPC, per tal  enviar-te la informació que ens has demanat. També la utilitzarem per fer-te arribar informació de la UPC, però si no la vols rebre, ens pots enviar un correu electrònic a saloensenyament@upc.edu o ens ho pots dir quan responguis els correus electrònics que t’enviem.  Finalment, també t’informem que, si vols accedir a les teves dades, canviar- les, oposar-te al fet que les tinguem o vols que  deixem de tractar-les, et pots adreçar al Servei de Comunicació i Promoció, amb  domicili a la plaça d’Eusebi Güell, 6 de  Barcelona o a l’adreça electrònica: saloensenyament@upc.edu
         """.decode('utf-8')
 
         anexos = ''
         for choice in choices:
             for i in graus[choice]:
-                link = '<a href="' + i['pdf'] + '">'+ i['place'] + ' ' + i['siglas'] + '</a>'
+                link = '<a href="' + i['pdf'] + '">'+ i['place'] + ' ' + i['siglas'] + '</a>' 
+                # Si no es Grau al mail ha de dir que és segon cicle, no 2n Cicle (està al csv)
+                if i['cicle'] != 'Grau':
+                    link = link + ' (segon cicle)'
                 anexos = anexos + '<b>' + choice.replace("  ","'") + '</b>' + ' impartit a '+ link + '<br/>'
-
+  
         body = body1 + anexos + '\n' + body2 + peu 
         
         message = Message(subject=subject,
@@ -124,6 +127,7 @@ def enviaMail(request, email, choices, graus):
 
 
 def enviaMailFutura(request, email, choices, graus):
+    ### Mail que s'envia amb SALO FUTURA
     if not email :
         return False
     else:
@@ -132,11 +136,11 @@ def enviaMailFutura(request, email, choices, graus):
         # Versió 2011 adjuntava annexes en PDF        
         #pdf_dir = request.registry.settings['pdf_dir']
         
-        subject = u"UPC. Saló de l'Ensenyament. Informació titulacions 2012/13"
+        subject = u"UPC. Saló dels Màsters i Postgraus. Informació 2012/13"
         
         body1 = """Benvolgut/Benvolguda,<br/><br/>
         
-    A continuació, adjuntem els documents relacionats amb les titulacions de la UPC sobre les quals has demanat informació al Saló de l'Ensenyament. Esperem que et siguin d’utilitat per ajudar-te a triar els teus estudis universitaris.<br/><br/>
+    A continuació, adjuntem els enllaços relacionats amb els màsters universitaris de la UPC sobre els quals has demanat informació a Futura. Esperem que et siguin d’utilitat per ajudar-te a triar els teus estudis universitaris.<br/><br/>
     """.decode('utf-8')
 
         anexos = ''
@@ -145,7 +149,7 @@ def enviaMailFutura(request, email, choices, graus):
                 link = '<a href="' + i['pdf'] + '">' + choice.replace("  ","'") + '</a>'
                 anexos = anexos + link + '<br/>'            
 
-        body2 = """<br/><br/>Estem a la teva disposició per aclarir-te qualsevol dubte. Ho pots fer:<br/>
+        body2 = """<br/>Estem a la teva disposició per aclarir-te qualsevol dubte. Ho pots fer:<br/>
     * Visitant http://www.upc.edu/aprendre/estudis<br/>
     * Enviant un correu a info@upc.edu<br/>
     * Telefonant al 93 401 62 00<br/><br/>
@@ -154,16 +158,15 @@ def enviaMailFutura(request, email, choices, graus):
 
     """.decode('utf-8')
 
-        peu = """Barcelona, """.decode('utf-8') + unicode(datetime.datetime.now().day) + """ de març de 2012<br/>
-    © UPC. Universitat Politècnica de Catalunya.  BarcelonaTech<br/><br/>
+        peu = """Barcelona, """.decode('utf-8') +"""<br/>© UPC. Universitat Politècnica de Catalunya.  BarcelonaTech<br/><br/>
 
-    En compliment del que estableixen les normatives de protecció de dades, t’informem que les dades que ens has donat en aquest formulari les inclourem al fitxer d’estudiants de la UPC, per tal de poder-te enviar la informació que ens has demanat. Usarem l’adreça de correu electrònic que ens has donat per enviar-te informació de la UPC, però si no vols rebre cap més informació, ens pots enviar un correu electrònic a saloensenyament@upc.edu, o ens ho pots dir quan responguis els correus electrònics que t’enviem.  Finalment, també t’informem que, si vols accedir a les dades teves, canviar- les, oposar-te a que les tinguem o que  deixem de tractar-les, et pots adreçar al Servei de Comunicació i Promoció, amb  domicili a la Plaça d’Eusebi Güell, 7 de  Barcelona, o a l’adreça electrònica: saloensenyament@upc.edu
+    En compliment del que estableixen les normatives de protecció de dades, t’informem que les dades que ens has donat en aquest formulari les inclourem al fitxer d’estudiants de la UPC, per  enviar-te la informació que ens has demanat. També la utilitzarem per fer-te arribar informació de la UPC,  però si no la vols rebre, ens pots enviar un correu electrònic a futura@upc.edu, o ens ho pots dir quan responguis els correus electrònics que t’enviem.  Finalment, també t’informem que, si vols accedir a les teves dades, canviar- les, oposar-te al fet que les tinguem o vols que  deixem de tractar-les, et pots adreçar al Servei de Comunicació i Promoció, amb  domicili a la Plaça d’Eusebi Güell, 6 de  Barcelona o a l’adreça electrònica: futura@upc.edu
         """.decode('utf-8')
 
         body = body1 + anexos + '\n' + body2 + peu 
         
         message = Message(subject=subject,
-                          sender="saloensenyament@upc.edu",
+                          sender="futura@upc.edu",
                           recipients=email.split(','),
                           html=body,)
 
@@ -200,7 +203,7 @@ def getTitulacionsEnsenyament(titulacions_file):
         titulacions[ambit][cicle].setdefault(nom, [])
 
         graus.setdefault(nom, [])
-        graus[nom].append({'pdf':pdf, 'place':place, 'siglas':siglas,})
+        graus[nom].append({'pdf':pdf, 'place':place, 'siglas':siglas, 'cicle':cicle})
         
     return titulacions, graus
 
