@@ -10,13 +10,13 @@ a.ui-link-inherit{
 }
 
 .ui-icon-arrow-r {
-	background-image: url("/static/icon_right.png");
+    background-image: url("static/icon_right.png");
     background-repeat: inherit;
     background-position: 0px;
 }
 
 .ui-icon-arrow-l {
-    background-image: url("/static/icon_left.png");
+    background-image: url("static/icon_left.png");
     background-repeat: inherit;
     background-position: 0px;
 }

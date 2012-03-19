@@ -1,4 +1,3 @@
-from persistent.mapping import PersistentMapping
 from pyramid.security import Allow, Authenticated
 
 class Root(object):

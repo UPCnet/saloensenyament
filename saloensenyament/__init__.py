@@ -1,5 +1,4 @@
 from pyramid.config import Configurator
-from repoze.zodbconn.finder import PersistentApplicationFinder
 from saloensenyament.models import appmaker
 
 from pyramid.session import UnencryptedCookieSessionFactoryConfig

@@ -15,11 +15,11 @@
         <link rel="shortcut icon" href="${request.application_url}/static/favicon.ico" />
         <link rel="apple-touch-icon" href="${request.application_url}/static/favicon.ico" />
         
-        <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css" />
-        <link type="text/css" href="css/saloensenyament.css" rel="stylesheet" />
+        <link rel="stylesheet" href="${request.application_url}/css/jquery.mobile-1.0.1.min.css" />
+        <link type="text/css" href="${request.application_url}/css/saloensenyament.css" rel="stylesheet" />
 
-        <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.0.1.min.js"></script>
+        <script type="text/javascript" src="${request.application_url}/js/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="${request.application_url}/js/jquery.mobile-1.0.1.min.js"></script>
 
         <!--<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script> --
         <!-- <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>-->

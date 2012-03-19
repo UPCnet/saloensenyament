@@ -27,7 +27,7 @@
 			<div data-role="page" tal:attributes="id string:id${repeat.ambit.number}">
 
 			    <div data-theme="b" data-role="header">
-			    	<a href="../salofutura/" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
+			    	<a href="${request.application_url}/salofutura/" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
 			       <h1 tal:content="ambit.name">Titol Ambit</h1>
 			    </div>
 

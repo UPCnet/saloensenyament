@@ -26,7 +26,7 @@
 		<tal:pages repeat="ambit titulacions">
 			<div data-role="page" tal:attributes="id string:id${repeat.ambit.number}">
 			    <div data-theme="b" data-role="header">
-			    	<a href="../../" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
+			    	<a href="${request.application_url}/" data-icon="back" data-iconpos="left" data-direction="reverse" class="ui-btn-left jqm-back">Back</a>			       
 			       <h1 tal:content="ambit.name">Titol Ambit</h1>
 			    </div>
 				<div data-role="content">

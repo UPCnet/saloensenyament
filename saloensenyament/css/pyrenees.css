@@ -15,7 +15,7 @@ main div.cell { width: 170px; float: left; padding-bottom: 100px; }
     width: 320px;
 }
 #login h1 a {
-    background: url("/static/logoPrint.gif") no-repeat scroll center top transparent;
+    background: url("static/logoPrint.gif") no-repeat scroll center top transparent;
     display: block;
     height: 67px;
     overflow: hidden;
