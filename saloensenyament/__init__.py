@@ -5,7 +5,7 @@ from saloensenyament.models import appmaker
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid_who.whov2 import WhoV2AuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
-
+from models import Root
 from pyramid_mailer.mailer import Mailer
 
 def main(global_config, **settings):
@@ -18,14 +18,7 @@ def main(global_config, **settings):
     authn_policy = WhoV2AuthenticationPolicy(whoconfig_file, identifier_id)
     authz_policy = ACLAuthorizationPolicy()    
     
-    zodb_uri = settings.get('zodb_uri')
-    if zodb_uri is None:
-        raise ValueError("No 'zodb_uri' in application configuration.")
-
-    finder = PersistentApplicationFinder(zodb_uri, appmaker)
-    def get_root(request):
-        return finder(request.environ)
-    config = Configurator(root_factory=get_root,
+    config = Configurator(root_factory=Root,
                           settings=settings,
                           session_factory = my_session_factory,
                           authentication_policy=authn_policy,

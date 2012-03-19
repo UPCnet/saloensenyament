@@ -2,7 +2,7 @@
 import os
 import csv
 from pyramid.view import view_config
-from saloensenyament.models import MyModel
+from saloensenyament.models import Root
 
 from saloensenyament.views.api import TemplateAPI
 
@@ -17,7 +17,7 @@ logger = logging.getLogger('saloensenyament')
 def my_view(request):
     return {'project':'saloensenyament'}
 
-@view_config(context=MyModel, renderer='saloensenyament:templates/saloform.pt', permission='view')
+@view_config(context=Root, renderer='saloensenyament:templates/saloform.pt', permission='view')
 def saloForm(context, request):
     page_title = "Formulari UPC Sal&oacute; Ensenyament 2012"
     api = TemplateAPI(context, request, page_title)
@@ -42,7 +42,7 @@ def saloForm(context, request):
     
     return dict(api=api, titulacions=sorted_titulacions)
 
-@view_config(context=MyModel, name="salofutura", renderer='saloensenyament:templates/salofutura.pt', permission='view')
+@view_config(context=Root, name="salofutura", renderer='saloensenyament:templates/salofutura.pt', permission='view')
 def saloFuturaForm(context, request):
     page_title = "Formulari UPC Sal&oacute; Futura 2012"
     api = TemplateAPI(context, request, page_title)
